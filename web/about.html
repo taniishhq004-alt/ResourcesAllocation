@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About the Emergency Resource Allocation System — project introduction, problem description, and objectives.">
+    <title>About — Emergency Resource Allocation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚨</text></svg>">
+</head>
+<body>
+    <canvas id="cursorCanvas"></canvas>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar__link">🏠 Dashboard</a>
+        <a href="about.html" class="navbar__link navbar__link--active">📄 About</a>
+        <a href="how-it-works.html" class="navbar__link">⚙️ How It Works</a>
+        <a href="code.html" class="navbar__link">💻 C Code</a>
+    </nav>
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+        <div class="header__icon">📄</div>
+        <h1 class="header__title">About The Project</h1>
+        <p class="header__subtitle">Emergency Resource Allocation System</p>
+        <span class="header__badge">BCA 2nd Semester · Minor Project</span>
+    </header>
+
+    <!-- ===== Content ===== -->
+    <main class="page-content">
+
+        <!-- Introduction -->
+        <h2>📌 Introduction</h2>
+        <p>
+            Natural disasters such as <strong>floods, earthquakes, fires, and accidents</strong> often create situations where multiple locations require emergency assistance at the same time. During such scenarios, resources like food, medical supplies, and rescue teams are limited. Therefore, it becomes essential to allocate these resources <strong>efficiently and fairly</strong>.
+        </p>
+        <p>
+            This project presents a simulation of an <strong>Emergency Resource Allocation System</strong> that demonstrates how data structures can be used to support decision-making during disaster situations. The system uses a <strong>Priority Queue</strong> to ensure that areas with higher urgency receive resources first. The project focuses on logical implementation and academic learning rather than real-time deployment.
+        </p>
+
+        <div class="divider"></div>
+
+        <!-- Problem Description -->
+        <h2>⚠️ Problem Description</h2>
+        <p>
+            In disaster situations, emergency requests are received from different locations simultaneously. Each location may have a different level of urgency depending on factors such as the <strong>number of people affected</strong> and the <strong>severity of the situation</strong>. Without a proper prioritization mechanism, critical areas may experience delays in receiving help, leading to loss of life and resources.
+        </p>
+        <p>
+            The problem addressed by this project is to design a system that can allocate limited emergency resources in a <strong>structured and efficient manner</strong>. The system should be able to identify high-priority areas and ensure fair allocation using appropriate data structures. This project simulates such a system using <strong>priority-based logic</strong>.
+        </p>
+
+        <div class="divider"></div>
+
+        <!-- Key Features -->
+        <h2>✨ Key Features</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card__icon">📥</div>
+                <div class="info-card__title">Accept Requests</div>
+                <div class="info-card__text">Accept emergency requests from multiple disaster-affected locations with full details.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">🔢</div>
+                <div class="info-card__title">Urgency Levels</div>
+                <div class="info-card__text">Assign urgency levels from 1 (low) to 10 (critical) for each emergency request.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">📊</div>
+                <div class="info-card__title">Priority Queue</div>
+                <div class="info-card__text">Store all requests using a Max-Heap Priority Queue data structure for efficient ordering.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">🚀</div>
+                <div class="info-card__title">Smart Allocation</div>
+                <div class="info-card__text">Automatically allocate resources to the highest-priority request first, every time.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">📋</div>
+                <div class="info-card__title">History Tracking</div>
+                <div class="info-card__text">Track and display the complete history of all resource allocations in order.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">🌐</div>
+                <div class="info-card__title">Dual Interface</div>
+                <div class="info-card__text">Available as both a C console program and a modern web-based simulation.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Functional Requirements -->
+        <h2>📋 Functional Requirements</h2>
+        <p>The system shall be able to:</p>
+        <ol>
+            <li>Accept emergency requests from multiple locations</li>
+            <li>Allow the user to specify urgency levels for each request</li>
+            <li>Store emergency requests using a <strong>Priority Queue</strong></li>
+            <li>Allocate resources to the highest priority request first</li>
+            <li>Handle multiple requests efficiently</li>
+            <li>Display the order in which resources are allocated</li>
+        </ol>
+
+        <h3>Non-Functional Requirements</h3>
+        <p>The system should:</p>
+        <ol>
+            <li>Be easy to understand and use</li>
+            <li>Provide quick response for allocation decisions</li>
+            <li>Be reliable and consistent in output</li>
+            <li>Run on a standard C compiler or web browser</li>
+            <li>Be scalable to handle additional requests</li>
+        </ol>
+
+        <div class="divider"></div>
+
+        <!-- Tools Used -->
+        <h2>🛠️ Tools Required</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card__icon">💻</div>
+                <div class="info-card__title">Programming Language</div>
+                <div class="info-card__text">C — for core data structure implementation and console application.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">🌐</div>
+                <div class="info-card__title">Frontend</div>
+                <div class="info-card__text">HTML, CSS, JavaScript — for the web-based visual simulation dashboard.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">⚙️</div>
+                <div class="info-card__title">Compiler / Tools</div>
+                <div class="info-card__text">GCC Compiler, Visual Studio Code (VS Code) for development.</div>
+            </div>
+            <div class="info-card">
+                <div class="info-card__icon">🖥️</div>
+                <div class="info-card__title">Operating System</div>
+                <div class="info-card__text">Windows — compatible with standard development environments.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CTA -->
+        <p style="text-align: center;">
+            <a href="index.html" class="btn-cta">🚀 Try the Simulation</a>
+            <a href="how-it-works.html" class="btn-cta" style="background: linear-gradient(135deg, var(--clr-safe), #38b000);">⚙️ How It Works</a>
+        </p>
+
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <p class="footer__text">
+            Emergency Resource Allocation System · 
+            <span class="footer__highlight">Priority Queue (Max-Heap)</span> ·
+            BCA 2nd Semester Minor Project · Data Structures Using C
+        </p>
+    </footer>
+    <script src="cursor.js"></script>
+</body>
+</html>

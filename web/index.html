@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emergency Resource Allocation System — A simulation using Priority Queue data structure to allocate disaster relief resources based on urgency.">
+    <title>Emergency Resource Allocation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚨</text></svg>">
+</head>
+<body>
+    <canvas id="cursorCanvas"></canvas>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar__link navbar__link--active">🏠 Dashboard</a>
+        <a href="about.html" class="navbar__link">📄 About</a>
+        <a href="how-it-works.html" class="navbar__link">⚙️ How It Works</a>
+        <a href="code.html" class="navbar__link">💻 C Code</a>
+    </nav>
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+        <div class="header__icon">🚨</div>
+        <h1 class="header__title">Emergency Resource Allocation</h1>
+        <p class="header__subtitle">Priority Queue Based Disaster Relief Simulation</p>
+        <span class="header__badge">Data Structures Using C · BCA 2nd Semester</span>
+    </header>
+
+    <!-- ===== Main App ===== -->
+    <main class="app">
+
+        <!-- Stats Bar -->
+        <section class="stats-bar" aria-label="Statistics">
+            <div class="stat-card stat-card--pending">
+                <div class="stat-card__icon">⏳</div>
+                <div class="stat-card__value" id="statPending">0</div>
+                <div class="stat-card__label">Pending</div>
+            </div>
+            <div class="stat-card stat-card--allocated">
+                <div class="stat-card__icon">✅</div>
+                <div class="stat-card__value" id="statAllocated">0</div>
+                <div class="stat-card__label">Allocated</div>
+            </div>
+            <div class="stat-card stat-card--total">
+                <div class="stat-card__icon">📊</div>
+                <div class="stat-card__value" id="statTotal">0</div>
+                <div class="stat-card__label">Total</div>
+            </div>
+            <div class="stat-card stat-card--urgency">
+                <div class="stat-card__icon">🔴</div>
+                <div class="stat-card__value" id="statAvgUrgency">—</div>
+                <div class="stat-card__label">Avg Urgency</div>
+            </div>
+        </section>
+
+        <!-- Main Grid -->
+        <div class="grid">
+
+            <!-- Left Column — Add Request Form -->
+            <aside>
+                <div class="card">
+                    <div class="card__header">
+                        <span class="card__header-icon">➕</span>
+                        <h2 class="card__header-title">Add Emergency Request</h2>
+                    </div>
+                    <div class="card__body">
+                        <form id="requestForm">
+                            <div class="form-group">
+                                <label for="location">Location Name</label>
+                                <input type="text" id="location" placeholder="e.g. Mumbai, Sector 7" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="disasterType">Disaster Type</label>
+                                <select id="disasterType" required>
+                                    <option value="Flood">🌊 Flood</option>
+                                    <option value="Earthquake">🏚️ Earthquake</option>
+                                    <option value="Fire">🔥 Fire</option>
+                                    <option value="Accident">🚨 Accident</option>
+                                    <option value="Cyclone">🌀 Cyclone</option>
+                                    <option value="Landslide">⛰️ Landslide</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="peopleAffected">People Affected</label>
+                                <input type="number" id="peopleAffected" min="1" max="100000" value="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="urgency">Urgency Level</label>
+                                <div class="urgency-slider-wrapper">
+                                    <input type="range" id="urgency" class="urgency-slider" min="1" max="10" value="5">
+                                    <div class="urgency-display">
+                                        <span class="urgency-value" id="urgencyValue">5</span>
+                                        <span class="urgency-label urgency-label--high" id="urgencyLabel">HIGH</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resourcesNeeded">Resources Needed</label>
+                                <select id="resourcesNeeded" required>
+                                    <option value="Food & Water">🍞 Food & Water</option>
+                                    <option value="Medical Supplies">💊 Medical Supplies</option>
+                                    <option value="Rescue Team">🚁 Rescue Team</option>
+                                    <option value="Shelter">🏕️ Shelter</option>
+                                    <option value="All Resources">📦 All Resources</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="submitBtn">
+                                ➕ Add to Priority Queue
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column — Queue + Allocation -->
+            <section>
+                <!-- Allocate Button -->
+                <div class="allocate-section">
+                    <button class="btn-allocate" id="allocateBtn" disabled>
+                        🚀 Allocate Resources — Highest Priority First
+                    </button>
+                </div>
+
+                <!-- Priority Queue -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card__header">
+                        <span class="card__header-icon">📋</span>
+                        <h2 class="card__header-title">Priority Queue</h2>
+                    </div>
+                    <div class="card__body">
+                        <ul class="queue-list" id="queueList">
+                            <!-- Rendered by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Allocation History -->
+                <div class="card">
+                    <div class="card__header">
+                        <span class="card__header-icon">📜</span>
+                        <h2 class="card__header-title">Allocation History</h2>
+                    </div>
+                    <div class="card__body">
+                        <ul class="history-list" id="historyList">
+                            <!-- Rendered by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <p class="footer__text">
+            Emergency Resource Allocation System · 
+            <span class="footer__highlight">Priority Queue (Max-Heap)</span> ·
+            BCA 2nd Semester Minor Project · Data Structures Using C
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cursor.js"></script>
+</body>
+</html>
